@@ -32,3 +32,5 @@ $nzg{lPath} =$nzg{app_path}."/nzg.log";
 my $curdate = `date "+%Y%m%d"`;
 my $nconvert = $nzg{app_path}."/nconvert";
 if(!-e $nconvert)
+
+This is a extraction.pl file
