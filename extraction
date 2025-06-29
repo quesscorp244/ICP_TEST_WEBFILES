@@ -1,0 +1,34 @@
+use strict;
+use warnings;
+use File::Basename;
+use XML::LibXML;
+use DBI;
+# use Fcntl 'LOCK_EX', 'LOCK_NB';
+use Encode;
+use File::Path qw(make_path remove_tree);
+use DateTime;
+use PDF::API2;
+use JSON;
+use LWP::UserAgent;
+use HTTP::Request::Common qw(POST);
+
+print "Instance script initiated : " . `date` . "\n";
+my %nzg;
+my @filetype ;
+my $arguments =shift;
+my @argmnts = split(',,,', $arguments);
+$nzg{pubid} = $argmnts[0];
+$nzg{pubname} = $argmnts[1]; 
+my $tat = $argmnts[2];
+my $language = $argmnts[3];
+my $pubtype = $argmnts[4];
+my $country = $argmnts[5];
+$nzg{cputcode} = "$argmnts[6]";
+$nzg{cus_batchdate} = "$argmnts[7]";
+$nzg{cpu_input_type} = "$argmnts[8]";
+$nzg{userid} = 10002;
+$nzg{app_path} = substr($0,0,rindex($0,'/'));
+$nzg{lPath} =$nzg{app_path}."/nzg.log";
+my $curdate = `date "+%Y%m%d"`;
+my $nconvert = $nzg{app_path}."/nconvert";
+if(!-e $nconvert)
